@@ -1,0 +1,266 @@
+body {
+	text-align: center;
+	font-family: Arial, sans-serif;
+	background-color: #094F6A;
+}
+
+.PlayerName {
+	background-color: #2b4abb;
+	color: #AECED9;
+}
+
+.container {
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 30px;
+}
+
+.player-box {
+	outline: 1px solid black;
+	padding: 10px;
+	width: 280px;
+	/* スコア表示部 */
+	height: 210px;
+	/* スコア表示部 */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #026ccb;
+}
+
+.darts-board {
+	position: relative;
+	height: 800px;
+	width: 800px;
+	margin: 0 auto;
+}
+
+.inner-bull {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 5%;
+	width: 5%;
+	transform: translate(-50%, -50%);
+	border-radius: 100%;
+	background: black;
+	z-index: 7;
+}
+
+.outer-bull {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 10%;
+	width: 10%;
+	transform: translate(-50%, -50%);
+	border-radius: 100%;
+	background: green;
+	z-index: 6;
+}
+
+$points: 20, 1, 18, 4, 13, 6, 10, 15, 2, 17, 3, 19, 7, 16, 8, 11, 14, 9, 12, 5;
+
+@each $i in $points {
+	.single-inner-#{$i} {
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		height: 0;
+		width: 0;
+
+		@if (index($points, $i)-1) % 2==0 {
+			border-top: black 140px solid;
+		}
+
+		@else {
+			border-top: rgb(199, 158, 125) 140px solid;
+		}
+
+		border-right: 22px solid transparent;
+		border-bottom: 0px solid transparent;
+		border-left: 22px solid transparent;
+		transform: translate(-50%, -100%) rotate(#{18*(index($points, $i)-1)}deg);
+		transform-origin: bottom;
+		z-index: 5;
+	}
+}
+
+@each $i in $points {
+	.triple-#{$i} {
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		height: 0;
+		width: 0;
+
+		@if (index($points, $i)-1) % 2==0 {
+			border-top: red 160px solid;
+		}
+
+		@else {
+			border-top: green 160px solid;
+		}
+
+		border-right: 25.14px solid transparent;
+		border-bottom: 0px solid transparent;
+		border-left: 25.14px solid transparent;
+		transform: translate(-50%, -100%) rotate(#{18*(index($points, $i)-1)}deg);
+		transform-origin: bottom;
+		z-index: 4;
+	}
+}
+
+@each $i in $points {
+	.single-outer-#{$i} {
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		height: 0;
+		width: 0;
+
+		@if (index($points, $i)-1) % 2==0 {
+			border-top: black 280px solid;
+		}
+
+		@else {
+			border-top: rgb(199, 158, 125) 280px solid;
+		}
+
+		border-right: 44px solid transparent;
+		border-bottom: 0px solid transparent;
+		border-left: 44px solid transparent;
+		transform: translate(-50%, -100%) rotate(#{18*(index($points, $i)-1)}deg);
+		transform-origin: bottom;
+		z-index: 3;
+	}
+}
+
+@each $i in $points {
+	.double-#{$i} {
+		top: 50%;
+		left: 50%;
+		position: absolute;
+		height: 0;
+		width: 0;
+
+		@if (index($points, $i)-1) % 2==0 {
+			border-top: red 300px solid;
+		}
+
+		@else {
+			border-top: green 300px solid;
+		}
+
+		border-right: 47.14px solid transparent;
+		border-bottom: 0px solid transparent;
+		border-left: 47.14px solid transparent;
+		transform: translate(-50%, -100%) rotate(#{18*(index($points, $i)-1)}deg);
+		transform-origin: bottom;
+		z-index: 2;
+	}
+}
+
+.out {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 670px;
+	width: 670px;
+	transform: translate(-50%, -50%);
+	border-radius: 100%;
+	background: black;
+	z-index: 1;
+}
+
+@each $i in $points {
+	.num-#{$i} {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform-origin: left top;
+		text-align: center;
+		transform: rotate(#{18*(index($points, $i)-1)}deg) translate(0, -350px) rotate(-#{18*(index($points, $i)-1)}deg) translate(-50%, -50%);
+		z-index: 99;
+		font-size: 30px;
+	}
+}
+
+.score {
+	font-size: 64px;
+	margin-top: 10px;
+	font-family: fantasy;
+}
+
+.next-button {
+	margin-top: 6px;
+	margin-left: 20px;
+	padding: 10px 20px;
+	font-size: 16px;
+}
+
+.PlayerName {
+	width: 220px;
+	height: 44px;
+	font-size: 20px;
+}
+
+.dart-count {
+	position: fixed;
+	/* 固定位置 */
+	bottom: 20px;
+	/* 下から20px */
+	right: 20px;
+	/* 右から20px */
+	display: flex;
+	/* 横並びに配置 */
+	filter: brightness(15%);
+}
+
+.dart-icon {
+	width: 180px;
+	/* 矢の幅 */
+	height: auto;
+	/* 高さは自動 */
+	margin-left: 5px;
+	/* 矢の間隔 */
+}
+
+.buttons {
+	display: flex;
+	/* フレックスボックスを適用 */
+	justify-content: center;
+	/* ボタンを中央揃えにする */
+	margin-top: 20px;
+	/* 上に余白を追加 */
+}
+
+.next-button {
+	margin-right: 10px;
+	/* ボタン間に右の余白を追加 */
+}
+
+@keyframes blinking {
+	0% {
+		opacity: 0%;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.blink {
+	animation: blinking;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+}
+
+.active-player {
+	outline: 6px ridge #DEBDD9;
+	border-width: 1px;
+	border-color: #DEBDD9;
+}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ダーツスコア計算</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- CSSファイルのリンク -->
+</head>
+
+<body>
+    <div class="container">
+        <!-- Player 1 Section -->
+        {% if current_player == "Player1" %}
+        <div class="player-box active-player" id="player1-box">
+            {% else %}
+            <div class="player-box" id="player1-box">
+                {% endif %}
+                <input type="text" id="player1-name" value="Player1" class='PlayerName'><br>
+                <div id="player1-score" class="score">{{ player1_score }}</div>
+            </div>
+
+            <!-- Dartboard CSS -->
+            <div id="notification-click-event"></div>
+            <div id="score-table"></div>
+
+            <div class="darts-board">
+                <div id='inner-bull' class="inner-bull" data-score="50"></div>
+                <div id='outer-bull' class="outer-bull" data-score="50"></div>
+
+                <div id='single-inner-1' class="single-inner-1" data-score='1'></div>
+                <div id='single-inner-2' class="single-inner-2" data-score='2'></div>
+                <div id='single-inner-3' class="single-inner-3" data-score='3'></div>
+                <div id='single-inner-4' class="single-inner-4" data-score='4'></div>
+                <div id='single-inner-5' class="single-inner-5" data-score='5'></div>
+                <div id='single-inner-6' class="single-inner-6" data-score='6'></div>
+                <div id='single-inner-7' class="single-inner-7" data-score='7'></div>
+                <div id='single-inner-8' class="single-inner-8" data-score='8'></div>
+                <div id='single-inner-9' class="single-inner-9" data-score='9'></div>
+                <div id='single-inner-1' class="single-inner-10" data-score='10'></div>
+                <div id='single-inner-11' class="single-inner-11" data-score='11'></div>
+                <div id='single-inner-12' class="single-inner-12" data-score='12'></div>
+                <div id='single-inner-13' class="single-inner-13" data-score='13'></div>
+                <div id='single-inner-14' class="single-inner-14" data-score='14'></div>
+                <div id='single-inner-15' class="single-inner-15" data-score='15'></div>
+                <div id='single-inner-16' class="single-inner-16" data-score='16'></div>
+                <div id='single-inner-17' class="single-inner-17" data-score='17'></div>
+                <div id='single-inner-18' class="single-inner-18" data-score='18'></div>
+                <div id='single-inner-19' class="single-inner-19" data-score='19'></div>
+                <div id='single-inner-20' class="single-inner-20" data-score='20'></div>
+
+                <div id='triple-1' class="triple-1" data-score='3'></div>
+                <div id='triple-2' class="triple-2" data-score='6'></div>
+                <div id='triple-3' class="triple-3" data-score='9'></div>
+                <div id='triple-4' class="triple-4" data-score='12'></div>
+                <div id='triple-5' class="triple-5" data-score='15'></div>
+                <div id='triple-6' class="triple-6" data-score='18'></div>
+                <div id='triple-7' class="triple-7" data-score='21'></div>
+                <div id='triple-8' class="triple-8" data-score='24'></div>
+                <div id='triple-9' class="triple-9" data-score='27'></div>
+                <div id='triple-10' class="triple-10" data-score='30'></div>
+                <div id='triple-11' class="triple-11" data-score='33'></div>
+                <div id='triple-12' class="triple-12" data-score='36'></div>
+                <div id='triple-13' class="triple-13" data-score='39'></div>
+                <div id='triple-14' class="triple-14" data-score='42'></div>
+                <div id='triple-15' class="triple-15" data-score='45'></div>
+                <div id='triple-16' class="triple-16" data-score='48'></div>
+                <div id='triple-17' class="triple-17" data-score='51'></div>
+                <div id='triple-18' class="triple-18" data-score='54'></div>
+                <div id='triple-19' class="triple-19" data-score='57'></div>
+                <div id='triple-20' class="triple-20" data-score='60'></div>
+
+                <div id='single-outer-1' class="single-outer-1" data-score='1'></div>
+                <div id='single-outer-2' class="single-outer-2" data-score='2'></div>
+                <div id='single-outer-3' class="single-outer-3" data-score='3'></div>
+                <div id='single-outer-4' class="single-outer-4" data-score='4'></div>
+                <div id='single-outer-5' class="single-outer-5" data-score='5'></div>
+                <div id='single-outer-6' class="single-outer-6" data-score='6'></div>
+                <div id='single-outer-7' class="single-outer-7" data-score='7'></div>
+                <div id='single-outer-8' class="single-outer-8" data-score='8'></div>
+                <div id='single-outer-9' class="single-outer-9" data-score='9'></div>
+                <div id='single-outer-10' class="single-outer-10" data-score='10'></div>
+                <div id='single-outer-11' class="single-outer-11" data-score='11'></div>
+                <div id='single-outer-12' class="single-outer-12" data-score='12'></div>
+                <div id='single-outer-13' class="single-outer-13" data-score='13'></div>
+                <div id='single-outer-14' class="single-outer-14" data-score='14'></div>
+                <div id='single-outer-15' class="single-outer-15" data-score='15'></div>
+                <div id='single-outer-16' class="single-outer-16" data-score='16'></div>
+                <div id='single-outer-17' class="single-outer-17" data-score='17'></div>
+                <div id='single-outer-18' class="single-outer-18" data-score='18'></div>
+                <div id='single-outer-19' class="single-outer-19" data-score='19'></div>
+                <div id='single-outer-20' class="single-outer-20" data-score='20'></div>
+
+                <div id='double-1' class="double-1" data-score='2'></div>
+                <div id='double-2' class="double-2" data-score='4'></div>
+                <div id='double-3' class="double-3" data-score='6'></div>
+                <div id='double-4' class="double-4" data-score='8'></div>
+                <div id='double-5' class="double-5" data-score='10'></div>
+                <div id='double-6' class="double-6" data-score='12'></div>
+                <div id='double-7' class="double-7" data-score='14'></div>
+                <div id='double-8' class="double-8" data-score='16'></div>
+                <div id='double-9' class="double-9" data-score='18'></div>
+                <div id='double-10' class="double-10" data-score='20'></div>
+                <div id='double-11' class="double-11" data-score='22'></div>
+                <div id='double-12' class="double-12" data-score='24'></div>
+                <div id='double-13' class="double-13" data-score='26'></div>
+                <div id='double-14' class="double-14" data-score='28'></div>
+                <div id='double-15' class="double-15" data-score='30'></div>
+                <div id='double-16' class="double-16" data-score='32'></div>
+                <div id='double-17' class="double-17" data-score='34'></div>
+                <div id='double-18' class="double-18" data-score='36'></div>
+                <div id='double-19' class="double-19" data-score='38'></div>
+                <div id='double-20' class="double-20" data-score='40'></div>
+
+                <div class="out"></div>
+
+                <span class="num-1">1</span>
+                <span class="num-2">2</span>
+                <span class="num-3">3</span>
+                <span class="num-4">4</span>
+                <span class="num-5">5</span>
+                <span class="num-6">6</span>
+                <span class="num-7">7</span>
+                <span class="num-8">8</span>
+                <span class="num-9">9</span>
+                <span class="num-10">10</span>
+                <span class="num-11">11</span>
+                <span class="num-12">12</span>
+                <span class="num-13">13</span>
+                <span class="num-14">14</span>
+                <span class="num-15">15</span>
+                <span class="num-16">16</span>
+                <span class="num-17">17</span>
+                <span class="num-18">18</span>
+                <span class="num-19">19</span>
+                <span class="num-20">20</span>
+            </div>
+
+            <!-- Player 2 Section -->
+            {% if current_player == "Player2" %}
+            <div class="player-box active-player" id="player2-box">
+                {% else %}
+                <div class="player-box" id="player2-box">
+                    {% endif %}
+                    <input type="text" id="player2-name" value="Player2" class="PlayerName"><br>
+                    <div id="player2-score" class="score">{{ player2_score }}</div>
+                </div>
+            </div>
+
+
+            <form method="POST" action="/calculate" id="dart-form" name="dart-form">
+                <input type="hidden" name="score" id="score-input">
+            </form>
+            <div class="buttons">
+                <form method="POST" action="/next_player">
+                    <button type="submit" class="next-button" id="next-player-button">次プレイヤー</button>
+                </form>
+
+                <form method="POST" action="/undo">
+                    <button type="submit" class="next-button" id="UnDo">入力しなおす</button>
+                </form>
+            </div>
+            <div class="dart-count">
+                {% if flg == True %}
+                <img src="static/dart-icon.png" class="dart-icon blink" id="dart1">
+                <img src="static/dart-icon.png" class="dart-icon blink" id="dart2">
+                <img src="static/dart-icon.png" class="dart-icon blink" id="dart3">
+                {% elif dart_left == 3 %}
+                <img src="static/dart-icon.png" class="dart-icon" id="dart1">
+                <img src="static/dart-icon.png" class="dart-icon" id="dart2">
+                <img src="static/dart-icon.png" class="dart-icon" id="dart3">
+                {% elif dart_left == 2 %}
+                <img src="static/dart-icon.png" class="dart-icon" id="dart2">
+                <img src="static/dart-icon.png" class="dart-icon" id="dart3">
+                {% elif dart_left == 1 %}
+                <img src="static/dart-icon.png" class="dart-icon" id="dart3">
+                {% else %}
+                {% endif %}
+            </div>
+
+            <script src="{{ url_for('static', filename='script.js') }}"></script> <!-- JavaScriptファイルのリンク -->
+</body>
+
+</html>
